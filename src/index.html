@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erudição Pop - O Jogo Começou</title>
-    
+    <title>Erudição Pop - Game</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Press+Start+2P&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-slate-900">
 
     <div class="ep-wrapper bg-slate-900 text-gray-100 flex flex-col min-h-screen">
-        
         <nav class="bg-slate-800 border-b border-slate-700 shadow-xl w-full sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-20 items-center">
@@ -27,7 +26,6 @@
                             <span class="text-sm font-bold text-amber-400 block leading-none tracking-widest">POP</span>
                         </div>
                     </div>
-
                     <div class="hidden md:flex items-center bg-slate-900 rounded-full px-4 py-2 border border-slate-700 shadow-inner gap-4">
                         <div class="flex flex-col items-end">
                             <span class="text-xs text-gray-400 font-bold uppercase">Nível <span id="player-lvl">1</span></span>
@@ -39,19 +37,16 @@
                             <i class="fas fa-user-astronaut text-amber-400"></i>
                         </div>
                     </div>
-
                     <div class="hidden md:flex space-x-6 items-center">
                         <button onclick="navigateTo('home')" class="hover:text-amber-400 transition font-bold text-sm uppercase"><i class="fas fa-home mr-2"></i>Base</button>
                         <button onclick="navigateTo('quests')" class="hover:text-amber-400 transition font-bold text-sm uppercase"><i class="fas fa-scroll mr-2"></i>Missões</button>
                         <button onclick="navigateTo('content')" class="hover:text-amber-400 transition font-bold text-sm uppercase"><i class="fas fa-layer-group mr-2"></i>Conteúdo</button>
                     </div>
-
                     <div class="md:hidden">
                         <button id="mobile-menu-btn" class="text-white hover:text-amber-400"><i class="fas fa-bars text-2xl"></i></button>
                     </div>
                 </div>
             </div>
-
             <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-t border-slate-700 pb-4">
                  <div class="flex items-center justify-between px-4 py-3 bg-slate-900 mb-2">
                     <span class="text-xs text-amber-400 font-bold">LVL <span id="mobile-lvl">1</span></span>
@@ -64,7 +59,7 @@
                 <button onclick="navigateTo('content')" class="block w-full text-left px-4 py-3 hover:bg-slate-700">Conteúdo</button>
             </div>
         </nav>
-
+    
         <main id="app-content" class="flex-grow relative p-4">
             
             <div id="page-home" class="page-section animate-fade">
@@ -82,7 +77,7 @@
                     </div>
                 </section>
             </div>
-
+    
             <div id="page-quests" class="page-section hidden animate-fade">
                 <div class="max-w-4xl mx-auto py-8">
                     <h2 class="text-2xl font-bold mb-6 text-white"><i class="fas fa-scroll text-amber-500 mr-2"></i>Quadro de Missões</h2>
@@ -95,7 +90,7 @@
                     </div>
                 </div>
             </div>
-
+    
             <div id="page-content" class="page-section hidden animate-fade">
                 <div class="max-w-7xl mx-auto py-8">
                     <h2 class="text-2xl font-bold text-white mb-6">Biblioteca Matemática</h2>
@@ -116,7 +111,7 @@
                 </div>
             </div>
         </main>
-
+    
         <div id="challenge-modal" class="fixed inset-0 bg-black/80 z-[100] hidden flex items-center justify-center backdrop-blur-sm p-4">
             <div class="bg-slate-800 rounded-2xl max-w-md w-full border-2 border-amber-500 shadow-2xl relative">
                 <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fas fa-times fa-lg"></i></button>

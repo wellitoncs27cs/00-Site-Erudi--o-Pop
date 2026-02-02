@@ -1,11 +1,9 @@
-// --- CONFIGURAÇÃO INICIAL E SAVE SYSTEM ---
 const SAVE_KEY = 'erudicao_pop_save_v1';
-
+    
 function loadProgress() {
     const saved = localStorage.getItem(SAVE_KEY);
     return saved ? JSON.parse(saved) : { xp: 120, level: 1, nextLevelXp: 500, unlocked: [] };
 }
-
 function saveProgress() {
     localStorage.setItem(SAVE_KEY, JSON.stringify(player));
 }
@@ -13,7 +11,6 @@ function saveProgress() {
 let player = loadProgress();
 let currentChallenge = null;
 
-// --- BANCO DE DADOS DE QUESTÕES ---
 const mathProblems = [
     { q: "2x = 10", a: 5, options: [3, 4, 5, 6] },
     { q: "x + 7 = 15", a: 8, options: [6, 7, 8, 9] },
@@ -22,7 +19,6 @@ const mathProblems = [
     { q: "Raiz de 81", a: 9, options: [7, 8, 9, 10] }
 ];
 
-// --- NAVEGAÇÃO SPA (Single Page Application) ---
 function navigateTo(pageId) {
     document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
     const page = document.getElementById('page-' + pageId);
@@ -31,14 +27,11 @@ function navigateTo(pageId) {
     window.scrollTo(0,0);
 }
 
-// Event Listener para o Menu Mobile
 const menuBtn = document.getElementById('mobile-menu-btn');
 if(menuBtn) menuBtn.addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('hidden'));
 
-// --- SISTEMA DE XP E LEVEL UP ---
 function addXP(amount) {
     player.xp += amount;
-    // Lógica de Level Up
     if (player.xp >= player.nextLevelXp) {
         player.level++;
         player.xp -= player.nextLevelXp;
@@ -50,23 +43,19 @@ function addXP(amount) {
     showFloatingXP(amount);
 }
 
-// --- ATUALIZAÇÃO DA INTERFACE (UI) ---
 function updateUI() {
     const pct = (player.xp / player.nextLevelXp) * 100;
     
-    // Atualiza Desktop
     const lvlEl = document.getElementById('player-lvl');
     const barEl = document.getElementById('player-xp-bar');
     if(lvlEl) lvlEl.innerText = player.level;
     if(barEl) barEl.style.width = pct + '%';
 
-    // Atualiza Mobile
     const mobLvl = document.getElementById('mobile-lvl');
     const mobBar = document.getElementById('mobile-xp-bar-mob');
     if(mobLvl) mobLvl.innerText = player.level;
     if(mobBar) mobBar.style.width = pct + '%';
     
-    // Atualiza Itens Desbloqueados
     player.unlocked.forEach(itemId => {
         const overlay = document.getElementById('overlay-' + itemId);
         const lockedItem = document.getElementById('locked-' + itemId);
@@ -85,7 +74,6 @@ function showFloatingXP(amount) {
     setTimeout(() => el.remove(), 1000);
 }
 
-// --- LÓGICA DO DESAFIO MATEMÁTICO ---
 function checkUnlock(itemId) {
     if (player.unlocked.includes(itemId)) return;
     currentChallenge = itemId;
@@ -105,7 +93,6 @@ function openMathModal() {
     modal.classList.remove('hidden');
     if(feedback) feedback.classList.add('hidden');
     
-    // Seleciona uma pergunta aleatória
     const prob = mathProblems[Math.floor(Math.random() * mathProblems.length)];
     document.getElementById('math-problem').innerText = `Se ${prob.q}, quanto vale x?`;
     
@@ -124,7 +111,6 @@ function openMathModal() {
 function verifyAnswer(sel, cor, btn) {
     const fb = document.getElementById('modal-feedback');
     if (sel === cor) {
-        // Resposta Correta
         btn.classList.remove('bg-slate-700');
         btn.classList.add('bg-green-600');
         if(fb) {
@@ -136,7 +122,6 @@ function verifyAnswer(sel, cor, btn) {
             successAction();
         }, 800);
     } else {
-        // Resposta Errada
         btn.classList.remove('bg-slate-700');
         btn.classList.add('bg-red-600');
         if(fb) {
@@ -163,5 +148,4 @@ function closeModal() {
     document.getElementById('challenge-modal').classList.add('hidden');
 }
 
-// Inicializa a UI ao carregar
 updateUI();
